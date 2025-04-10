@@ -10,14 +10,11 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'df67ff76-eaff-49bd-b4d7-587f5c2f5ea5'
+  dockerRegistryServiceConnection: '34abc787-3bae-4a08-ac15-30450c21ca9e'
   imageRepository: 'employabilitylifenginxstaticsite'
   containerRegistry: 'nginxstatic.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
-
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: Build
@@ -26,7 +23,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: $(vmImageName)
+      name: Default  # 👈 Replace vmImage with the name of your self-hosted agent pool (usually "Default")
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
